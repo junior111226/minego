@@ -2,6 +2,7 @@ package client
 
 import (
 	"github.com/KonjacBot/go-mc/chat"
+	pk "github.com/KonjacBot/go-mc/net/packet"
 )
 
 //codec:gen
@@ -23,12 +24,12 @@ type UpdateTeams struct {
 //codec:gen
 type UpdateTeamsCreateTeam struct {
 	TeamDisplayName   chat.Message
-	FriendlyFlags     int8
-	NameTagVisibility int32 `mc:"VarInt"`
-	CollisionRule     int32 `mc:"VarInt"`
-	TeamColor         int32 `mc:"VarInt"`
 	TeamPrefix        chat.Message
 	TeamSuffix        chat.Message
+	NameTagVisibility int32 `mc:"VarInt"`
+	CollisionRule     int32 `mc:"VarInt"`
+	TeamColor         pk.Option[pk.VarInt, *pk.VarInt]
+	FriendlyFlags     int8
 	Entities          []string `mc:"String"`
 }
 
@@ -39,12 +40,12 @@ type UpdateTeamsRemoveTeam struct {
 //codec:gen
 type UpdateTeamsUpdateTeam struct {
 	DisplayName       chat.Message
-	FriendlyFlags     int8
-	NameTagVisibility int32 `mc:"VarInt"`
-	CollisionRule     int32 `mc:"VarInt"`
-	TeamColor         int32 `mc:"VarInt"`
 	TeamPrefix        chat.Message
 	TeamSuffix        chat.Message
+	NameTagVisibility int32 `mc:"VarInt"`
+	CollisionRule     int32 `mc:"VarInt"`
+	TeamColor         pk.Option[pk.VarInt, *pk.VarInt]
+	FriendlyFlags     int8
 }
 
 //codec:gen

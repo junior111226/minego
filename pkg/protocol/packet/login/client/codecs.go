@@ -160,12 +160,22 @@ func (c *LoginLoginFinished) ReadFrom(r io.Reader) (n int64, err error) {
 	if err != nil {
 		return n, err
 	}
+	temp, err = (*packet.UUID)(&c.SessionID).ReadFrom(r)
+	n += temp
+	if err != nil {
+		return n, err
+	}
 	return n, err
 }
 
 func (c LoginLoginFinished) WriteTo(w io.Writer) (n int64, err error) {
 	var temp int64
 	temp, err = (&c.GameProfile).WriteTo(w)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	temp, err = (*packet.UUID)(&c.SessionID).WriteTo(w)
 	n += temp
 	if err != nil {
 		return n, err

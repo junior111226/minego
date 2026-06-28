@@ -9,24 +9,43 @@ import (
 	"github.com/KonjacBot/go-mc/net/packet"
 )
 
+func (c *AdditionalTradeCost) ReadFrom(r io.Reader) (n int64, err error) {
+	var temp int64
+	temp, err = (*packet.VarInt)(&c.Cost).ReadFrom(r)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}
+
+func (c AdditionalTradeCost) WriteTo(w io.Writer) (n int64, err error) {
+	var temp int64
+	temp, err = (*packet.VarInt)(&c.Cost).WriteTo(w)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}
 func (c *AttackRange) ReadFrom(r io.Reader) (n int64, err error) {
 	var temp int64
-	temp, err = (*packet.Float)(&c.MinRange).ReadFrom(r)
+	temp, err = (*packet.Float)(&c.MinReach).ReadFrom(r)
 	n += temp
 	if err != nil {
 		return n, err
 	}
-	temp, err = (*packet.Float)(&c.MaxRange).ReadFrom(r)
+	temp, err = (*packet.Float)(&c.MaxReach).ReadFrom(r)
 	n += temp
 	if err != nil {
 		return n, err
 	}
-	temp, err = (*packet.Float)(&c.MinCreativeRange).ReadFrom(r)
+	temp, err = (*packet.Float)(&c.MinCreativeReach).ReadFrom(r)
 	n += temp
 	if err != nil {
 		return n, err
 	}
-	temp, err = (*packet.Float)(&c.MaxCreativeRange).ReadFrom(r)
+	temp, err = (*packet.Float)(&c.MaxCreativeReach).ReadFrom(r)
 	n += temp
 	if err != nil {
 		return n, err
@@ -46,22 +65,22 @@ func (c *AttackRange) ReadFrom(r io.Reader) (n int64, err error) {
 
 func (c AttackRange) WriteTo(w io.Writer) (n int64, err error) {
 	var temp int64
-	temp, err = (*packet.Float)(&c.MinRange).WriteTo(w)
+	temp, err = (*packet.Float)(&c.MinReach).WriteTo(w)
 	n += temp
 	if err != nil {
 		return n, err
 	}
-	temp, err = (*packet.Float)(&c.MaxRange).WriteTo(w)
+	temp, err = (*packet.Float)(&c.MaxReach).WriteTo(w)
 	n += temp
 	if err != nil {
 		return n, err
 	}
-	temp, err = (*packet.Float)(&c.MinCreativeRange).WriteTo(w)
+	temp, err = (*packet.Float)(&c.MinCreativeReach).WriteTo(w)
 	n += temp
 	if err != nil {
 		return n, err
 	}
-	temp, err = (*packet.Float)(&c.MaxCreativeRange).WriteTo(w)
+	temp, err = (*packet.Float)(&c.MaxCreativeReach).WriteTo(w)
 	n += temp
 	if err != nil {
 		return n, err
@@ -930,6 +949,25 @@ func (c CatCollar) WriteTo(w io.Writer) (n int64, err error) {
 	}
 	return n, err
 }
+func (c *CatSoundVariant) ReadFrom(r io.Reader) (n int64, err error) {
+	var temp int64
+	temp, err = (*packet.VarInt)(&c.Variant).ReadFrom(r)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}
+
+func (c CatSoundVariant) WriteTo(w io.Writer) (n int64, err error) {
+	var temp int64
+	temp, err = (*packet.VarInt)(&c.Variant).WriteTo(w)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}
 func (c *CatVariant) ReadFrom(r io.Reader) (n int64, err error) {
 	var temp int64
 	temp, err = (*packet.VarInt)(&c.Variant).ReadFrom(r)
@@ -962,6 +1000,25 @@ func (c *ChargedProjectiles) ReadFrom(r io.Reader) (n int64, err error) {
 func (c ChargedProjectiles) WriteTo(w io.Writer) (n int64, err error) {
 	var temp int64
 	temp, err = packet.Array(&c.Projectiles).WriteTo(w)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}
+func (c *ChickenSoundVariant) ReadFrom(r io.Reader) (n int64, err error) {
+	var temp int64
+	temp, err = (*packet.VarInt)(&c.Variant).ReadFrom(r)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}
+
+func (c ChickenSoundVariant) WriteTo(w io.Writer) (n int64, err error) {
+	var temp int64
+	temp, err = (*packet.VarInt)(&c.Variant).WriteTo(w)
 	n += temp
 	if err != nil {
 		return n, err
@@ -1206,6 +1263,25 @@ func (c *ContainerLoot) ReadFrom(r io.Reader) (n int64, err error) {
 func (c ContainerLoot) WriteTo(w io.Writer) (n int64, err error) {
 	var temp int64
 	temp, err = packet.NBT(&c.Data).WriteTo(w)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}
+func (c *CowSoundVariant) ReadFrom(r io.Reader) (n int64, err error) {
+	var temp int64
+	temp, err = (*packet.VarInt)(&c.Variant).ReadFrom(r)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}
+
+func (c CowSoundVariant) WriteTo(w io.Writer) (n int64, err error) {
+	var temp int64
+	temp, err = (*packet.VarInt)(&c.Variant).WriteTo(w)
 	n += temp
 	if err != nil {
 		return n, err
@@ -1501,6 +1577,25 @@ func (c *DebugStickState) ReadFrom(r io.Reader) (n int64, err error) {
 func (c DebugStickState) WriteTo(w io.Writer) (n int64, err error) {
 	var temp int64
 	temp, err = packet.NBT(&c.Data).WriteTo(w)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}
+func (c *Dye) ReadFrom(r io.Reader) (n int64, err error) {
+	var temp int64
+	temp, err = (&c.Color).ReadFrom(r)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}
+
+func (c Dye) WriteTo(w io.Writer) (n int64, err error) {
+	var temp int64
+	temp, err = (&c.Color).WriteTo(w)
 	n += temp
 	if err != nil {
 		return n, err
@@ -2722,6 +2817,25 @@ func (c PiercingWeapon) WriteTo(w io.Writer) (n int64, err error) {
 	}
 	return n, err
 }
+func (c *PigSoundVariant) ReadFrom(r io.Reader) (n int64, err error) {
+	var temp int64
+	temp, err = (*packet.VarInt)(&c.Variant).ReadFrom(r)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}
+
+func (c PigSoundVariant) WriteTo(w io.Writer) (n int64, err error) {
+	var temp int64
+	temp, err = (*packet.VarInt)(&c.Variant).WriteTo(w)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}
 func (c *PigVariant) ReadFrom(r io.Reader) (n int64, err error) {
 	var temp int64
 	temp, err = (*packet.VarInt)(&c.Variant).ReadFrom(r)
@@ -3088,6 +3202,25 @@ func (c ProvidesBannerPatterns) WriteTo(w io.Writer) (n int64, err error) {
 	}
 	return n, err
 }
+func (c *ProvidesTrimMaterial) ReadFrom(r io.Reader) (n int64, err error) {
+	var temp int64
+	temp, err = (&c.Material).ReadFrom(r)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}
+
+func (c ProvidesTrimMaterial) WriteTo(w io.Writer) (n int64, err error) {
+	var temp int64
+	temp, err = (&c.Material).WriteTo(w)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}
 func (c *RabbitVariant) ReadFrom(r io.Reader) (n int64, err error) {
 	var temp int64
 	temp, err = (*packet.VarInt)(&c.Variant).ReadFrom(r)
@@ -3253,6 +3386,25 @@ func (c *StoredEnchantments) ReadFrom(r io.Reader) (n int64, err error) {
 func (c StoredEnchantments) WriteTo(w io.Writer) (n int64, err error) {
 	var temp int64
 	temp, err = packet.Array(&c.Enchantments).WriteTo(w)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}
+func (c *SulfurCubeContent) ReadFrom(r io.Reader) (n int64, err error) {
+	var temp int64
+	temp, err = (&c.AbsorbedBlockItemStack).ReadFrom(r)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}
+
+func (c SulfurCubeContent) WriteTo(w io.Writer) (n int64, err error) {
+	var temp int64
+	temp, err = (&c.AbsorbedBlockItemStack).WriteTo(w)
 	n += temp
 	if err != nil {
 		return n, err
@@ -4070,58 +4222,6 @@ func (c ZombieNautilusVariant) WriteTo(w io.Writer) (n int64, err error) {
 	return n, err
 }
 
-// Float32VarIntArray a utility type for encoding/decoding packet.Float -> float32[packet.VarInt] slice.
-type Float32VarIntArray []float32
-
-func (a Float32VarIntArray) WriteTo(w io.Writer) (n int64, err error) {
-	size := len(a)
-	nn, err := packet.VarInt(size).WriteTo(w)
-	if err != nil {
-		return n, err
-	}
-	n += nn
-	for i := 0; i < size; i++ {
-		nn, err := packet.Float(a[i]).WriteTo(w)
-		n += nn
-		if err != nil {
-			return n, err
-		}
-	}
-	return n, nil
-}
-
-func (a *Float32VarIntArray) ReadFrom(r io.Reader) (n int64, err error) {
-	var size packet.VarInt
-	nn, err := size.ReadFrom(r)
-	n += nn
-	if err != nil {
-		return n, err
-	}
-	if size < 0 {
-		return n, errors.New("array length less than zero")
-	}
-
-	if size > 32767 {
-		return n, errors.New("array length greater than 32767")
-	}
-
-	if cap(*a) >= int(size) {
-		*a = (*a)[:int(size)]
-	} else {
-		*a = make(Float32VarIntArray, int(size))
-	}
-
-	for i := 0; i < int(size); i++ {
-		nn, err = (*packet.Float)(&(*a)[i]).ReadFrom(r)
-		n += nn
-		if err != nil {
-			return n, err
-		}
-	}
-
-	return n, err
-}
-
 // Int32VarIntArray a utility type for encoding/decoding packet.Int -> int32[packet.VarInt] slice.
 type Int32VarIntArray []int32
 
@@ -4165,6 +4265,58 @@ func (a *Int32VarIntArray) ReadFrom(r io.Reader) (n int64, err error) {
 
 	for i := 0; i < int(size); i++ {
 		nn, err = (*packet.Int)(&(*a)[i]).ReadFrom(r)
+		n += nn
+		if err != nil {
+			return n, err
+		}
+	}
+
+	return n, err
+}
+
+// Float32VarIntArray a utility type for encoding/decoding packet.Float -> float32[packet.VarInt] slice.
+type Float32VarIntArray []float32
+
+func (a Float32VarIntArray) WriteTo(w io.Writer) (n int64, err error) {
+	size := len(a)
+	nn, err := packet.VarInt(size).WriteTo(w)
+	if err != nil {
+		return n, err
+	}
+	n += nn
+	for i := 0; i < size; i++ {
+		nn, err := packet.Float(a[i]).WriteTo(w)
+		n += nn
+		if err != nil {
+			return n, err
+		}
+	}
+	return n, nil
+}
+
+func (a *Float32VarIntArray) ReadFrom(r io.Reader) (n int64, err error) {
+	var size packet.VarInt
+	nn, err := size.ReadFrom(r)
+	n += nn
+	if err != nil {
+		return n, err
+	}
+	if size < 0 {
+		return n, errors.New("array length less than zero")
+	}
+
+	if size > 32767 {
+		return n, errors.New("array length greater than 32767")
+	}
+
+	if cap(*a) >= int(size) {
+		*a = (*a)[:int(size)]
+	} else {
+		*a = make(Float32VarIntArray, int(size))
+	}
+
+	for i := 0; i < int(size); i++ {
+		nn, err = (*packet.Float)(&(*a)[i]).ReadFrom(r)
 		n += nn
 		if err != nil {
 			return n, err

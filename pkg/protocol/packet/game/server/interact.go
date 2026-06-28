@@ -2,19 +2,16 @@ package server
 
 import (
 	"github.com/KonjacBot/go-mc/data/packetid"
+
+	"github.com/KonjacBot/minego/pkg/protocol"
 )
 
 //codec:gen
 type Interact struct {
-	EntityID int32 `mc:"VarInt"`
-	Type     int32 `mc:"VarInt"`
-	//opt:enum:Type:0
-	InteractHand int32 `mc:"VarInt"`
-	//opt:enum:Type:2
-	InteractAtTargetX, InteractAtTargetY, InteractAtTargetZ float32
-	//opt:enum:Type:2
-	InteractAtHand  int32 `mc:"VarInt"`
-	SneakKeyPressed bool
+	EntityID             int32 `mc:"VarInt"`
+	Hand                 int32 `mc:"VarInt"`
+	Location             protocol.LpVec3
+	UsingSecondaryAction bool
 }
 
 func (*Interact) PacketID() packetid.ServerboundPacketID {

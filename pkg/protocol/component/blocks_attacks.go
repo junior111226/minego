@@ -12,7 +12,7 @@ type BlocksAttacks struct {
 	ItemDamageThreshold  float32
 	ItemDamageBase       float32
 	ItemDamageFactor     float32
-	BypassedBy           pk.Option[pk.Identifier, *pk.Identifier]
+	BypassedBy           pk.Option[pk.IDSet, *pk.IDSet]
 	HasBlockSound        bool
 	//opt:optional:HasBlockSound
 	BlockSoundID int32 `mc:"VarInt"`

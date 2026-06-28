@@ -1,12 +1,12 @@
 package component
 
 import (
-	slot2 "github.com/KonjacBot/minego/pkg/protocol/slot"
+	"github.com/KonjacBot/minego/pkg/protocol/slot"
 )
 
 //codec:gen
 type ChargedProjectiles struct {
-	Projectiles []slot2.Slot
+	Projectiles []slot.ItemStackTemplate
 }
 
 func (*ChargedProjectiles) ID() string {

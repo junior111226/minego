@@ -415,6 +415,12 @@ func init() {
 	registerPacket(func() ClientboundPacket {
 		return &ShowDialog{}
 	})
+	registerPacket(func() ClientboundPacket {
+		return &GameRuleValues{}
+	})
+	registerPacket(func() ClientboundPacket {
+		return &LowDiskSpaceWarning{}
+	})
 }
 
 func registerPacket(creator clientBoundPacketCreator) {
@@ -816,4 +822,10 @@ func (*ClearDialog) PacketID() packetid.ClientboundPacketID {
 }
 func (*ShowDialog) PacketID() packetid.ClientboundPacketID {
 	return packetid.ClientboundShowDialog
+}
+func (*GameRuleValues) PacketID() packetid.ClientboundPacketID {
+	return packetid.ClientboundGameRuleValues
+}
+func (*LowDiskSpaceWarning) PacketID() packetid.ClientboundPacketID {
+	return packetid.ClientboundLowDiskSpaceWarning
 }

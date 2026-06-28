@@ -6,7 +6,7 @@ import (
 
 //codec:gen
 type UseRemainder struct {
-	Remainder slot.Slot
+	Remainder slot.ItemStackTemplate
 }
 
 func (*UseRemainder) ID() string {

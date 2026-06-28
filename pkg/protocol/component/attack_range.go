@@ -2,11 +2,11 @@ package component
 
 //codec:gen
 type AttackRange struct {
-	MinRange float32
-	MaxRange float32
+	MinReach float32
+	MaxReach float32
 
-	MinCreativeRange float32
-	MaxCreativeRange float32
+	MinCreativeReach float32
+	MaxCreativeReach float32
 
 	HitboxMargin float32
 

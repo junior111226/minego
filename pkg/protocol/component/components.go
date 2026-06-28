@@ -129,7 +129,13 @@ func init() {
 		return &SwingAnimation{}
 	})
 	slot.RegisterComponent(func() slot.Component {
+		return &AdditionalTradeCost{}
+	})
+	slot.RegisterComponent(func() slot.Component {
 		return &StoredEnchantments{}
+	})
+	slot.RegisterComponent(func() slot.Component {
+		return &Dye{}
 	})
 	slot.RegisterComponent(func() slot.Component {
 		return &DyedColor{}
@@ -234,6 +240,9 @@ func init() {
 		return &Bees{}
 	})
 	slot.RegisterComponent(func() slot.Component {
+		return &SulfurCubeContent{}
+	})
+	slot.RegisterComponent(func() slot.Component {
 		return &Lock{}
 	})
 	slot.RegisterComponent(func() slot.Component {
@@ -282,13 +291,22 @@ func init() {
 		return &PigVariant{}
 	})
 	slot.RegisterComponent(func() slot.Component {
+		return &PigSoundVariant{}
+	})
+	slot.RegisterComponent(func() slot.Component {
 		return &CowVariant{}
 	})
 	slot.RegisterComponent(func() slot.Component {
-		return &ZombieNautilusVariant{}
+		return &CowSoundVariant{}
 	})
 	slot.RegisterComponent(func() slot.Component {
 		return &ChickenVariant{}
+	})
+	slot.RegisterComponent(func() slot.Component {
+		return &ChickenSoundVariant{}
+	})
+	slot.RegisterComponent(func() slot.Component {
+		return &ZombieNautilusVariant{}
 	})
 	slot.RegisterComponent(func() slot.Component {
 		return &FrogVariant{}
@@ -307,6 +325,9 @@ func init() {
 	})
 	slot.RegisterComponent(func() slot.Component {
 		return &CatVariant{}
+	})
+	slot.RegisterComponent(func() slot.Component {
+		return &CatSoundVariant{}
 	})
 	slot.RegisterComponent(func() slot.Component {
 		return &CatCollar{}

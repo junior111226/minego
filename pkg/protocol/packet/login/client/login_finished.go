@@ -1,6 +1,8 @@
 package client
 
 import (
+	"github.com/google/uuid"
+
 	"github.com/KonjacBot/go-mc/data/packetid"
 	"github.com/KonjacBot/minego/pkg/protocol"
 )
@@ -8,6 +10,7 @@ import (
 //codec:gen
 type LoginLoginFinished struct {
 	GameProfile protocol.GameProfile
+	SessionID   uuid.UUID `mc:"UUID"`
 }
 
 func (*LoginLoginFinished) PacketID() packetid.ClientboundPacketID {

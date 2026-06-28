@@ -39,6 +39,7 @@ type Login struct {
 	ShowDeathScreen       bool
 	DoLimitedCrafting     bool
 	CommonPlayerSpawnInfo CommonPlayerSpawnInfo
+	OnlineMode            bool
 	EnforcesSecureChat    bool
 }
 

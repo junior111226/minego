@@ -6,7 +6,7 @@ import (
 
 //codec:gen
 type DamageResistant struct {
-	Types pk.Identifier // Tag specifying damage types
+	Types pk.IDSet // HolderSet of damage types
 }
 
 func (*DamageResistant) ID() string {

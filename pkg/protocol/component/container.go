@@ -1,12 +1,13 @@
 package component
 
 import (
-	slot2 "github.com/KonjacBot/minego/pkg/protocol/slot"
+	pk "github.com/KonjacBot/go-mc/net/packet"
+	"github.com/KonjacBot/minego/pkg/protocol/slot"
 )
 
 //codec:gen
 type Container struct {
-	Items []slot2.Slot
+	Items []pk.Option[slot.ItemStackTemplate, *slot.ItemStackTemplate]
 }
 
 func (*Container) ID() string {

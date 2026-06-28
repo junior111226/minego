@@ -421,3 +421,51 @@ func (c BlockCrumble) WriteTo(w io.Writer) (n int64, err error) {
 	}
 	return n, err
 }
+func (c *Geyser) ReadFrom(r io.Reader) (n int64, err error) {
+	var temp int64
+	temp, err = (*packet.Int)(&c.WaterBlocks).ReadFrom(r)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}
+
+func (c Geyser) WriteTo(w io.Writer) (n int64, err error) {
+	var temp int64
+	temp, err = (*packet.Int)(&c.WaterBlocks).WriteTo(w)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}
+func (c *GeyserBase) ReadFrom(r io.Reader) (n int64, err error) {
+	var temp int64
+	temp, err = (*packet.Int)(&c.WaterBlocks).ReadFrom(r)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	temp, err = (*packet.Float)(&c.BurstImpulseBase).ReadFrom(r)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}
+
+func (c GeyserBase) WriteTo(w io.Writer) (n int64, err error) {
+	var temp int64
+	temp, err = (*packet.Int)(&c.WaterBlocks).WriteTo(w)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	temp, err = (*packet.Float)(&c.BurstImpulseBase).WriteTo(w)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}

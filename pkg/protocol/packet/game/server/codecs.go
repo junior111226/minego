@@ -28,6 +28,25 @@ func (c AcceptTeleportation) WriteTo(w io.Writer) (n int64, err error) {
 	}
 	return n, err
 }
+func (c *Attack) ReadFrom(r io.Reader) (n int64, err error) {
+	var temp int64
+	temp, err = (*packet.VarInt)(&c.EntityID).ReadFrom(r)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}
+
+func (c Attack) WriteTo(w io.Writer) (n int64, err error) {
+	var temp int64
+	temp, err = (*packet.VarInt)(&c.EntityID).WriteTo(w)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}
 func (c *BlockEntityTagQuery) ReadFrom(r io.Reader) (n int64, err error) {
 	var temp int64
 	temp, err = (*packet.VarInt)(&c.TransactionID).ReadFrom(r)
@@ -949,47 +968,17 @@ func (c *Interact) ReadFrom(r io.Reader) (n int64, err error) {
 	if err != nil {
 		return n, err
 	}
-	temp, err = (*packet.VarInt)(&c.Type).ReadFrom(r)
+	temp, err = (*packet.VarInt)(&c.Hand).ReadFrom(r)
 	n += temp
 	if err != nil {
 		return n, err
 	}
-	if c.Type == 0 {
-		temp, err = (*packet.VarInt)(&c.InteractHand).ReadFrom(r)
-		n += temp
-		if err != nil {
-			return n, err
-		}
+	temp, err = (&c.Location).ReadFrom(r)
+	n += temp
+	if err != nil {
+		return n, err
 	}
-	if c.Type == 2 {
-		temp, err = (*packet.Float)(&c.InteractAtTargetX).ReadFrom(r)
-		n += temp
-		if err != nil {
-			return n, err
-		}
-	}
-	if c.Type == 2 {
-		temp, err = (*packet.Float)(&c.InteractAtTargetY).ReadFrom(r)
-		n += temp
-		if err != nil {
-			return n, err
-		}
-	}
-	if c.Type == 2 {
-		temp, err = (*packet.Float)(&c.InteractAtTargetZ).ReadFrom(r)
-		n += temp
-		if err != nil {
-			return n, err
-		}
-	}
-	if c.Type == 2 {
-		temp, err = (*packet.VarInt)(&c.InteractAtHand).ReadFrom(r)
-		n += temp
-		if err != nil {
-			return n, err
-		}
-	}
-	temp, err = (*packet.Boolean)(&c.SneakKeyPressed).ReadFrom(r)
+	temp, err = (*packet.Boolean)(&c.UsingSecondaryAction).ReadFrom(r)
 	n += temp
 	if err != nil {
 		return n, err
@@ -1004,47 +993,17 @@ func (c Interact) WriteTo(w io.Writer) (n int64, err error) {
 	if err != nil {
 		return n, err
 	}
-	temp, err = (*packet.VarInt)(&c.Type).WriteTo(w)
+	temp, err = (*packet.VarInt)(&c.Hand).WriteTo(w)
 	n += temp
 	if err != nil {
 		return n, err
 	}
-	if c.Type == 0 {
-		temp, err = (*packet.VarInt)(&c.InteractHand).WriteTo(w)
-		n += temp
-		if err != nil {
-			return n, err
-		}
+	temp, err = (&c.Location).WriteTo(w)
+	n += temp
+	if err != nil {
+		return n, err
 	}
-	if c.Type == 2 {
-		temp, err = (*packet.Float)(&c.InteractAtTargetX).WriteTo(w)
-		n += temp
-		if err != nil {
-			return n, err
-		}
-	}
-	if c.Type == 2 {
-		temp, err = (*packet.Float)(&c.InteractAtTargetY).WriteTo(w)
-		n += temp
-		if err != nil {
-			return n, err
-		}
-	}
-	if c.Type == 2 {
-		temp, err = (*packet.Float)(&c.InteractAtTargetZ).WriteTo(w)
-		n += temp
-		if err != nil {
-			return n, err
-		}
-	}
-	if c.Type == 2 {
-		temp, err = (*packet.VarInt)(&c.InteractAtHand).WriteTo(w)
-		n += temp
-		if err != nil {
-			return n, err
-		}
-	}
-	temp, err = (*packet.Boolean)(&c.SneakKeyPressed).WriteTo(w)
+	temp, err = (*packet.Boolean)(&c.UsingSecondaryAction).WriteTo(w)
 	n += temp
 	if err != nil {
 		return n, err
@@ -2021,6 +1980,54 @@ func (c SetCreativeModeSlot) WriteTo(w io.Writer) (n int64, err error) {
 	}
 	return n, err
 }
+func (c *SetGameRule) ReadFrom(r io.Reader) (n int64, err error) {
+	var temp int64
+	temp, err = packet.Array(&c.Entries).ReadFrom(r)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}
+
+func (c SetGameRule) WriteTo(w io.Writer) (n int64, err error) {
+	var temp int64
+	temp, err = packet.Array(&c.Entries).WriteTo(w)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}
+func (c *SetGameRuleEntry) ReadFrom(r io.Reader) (n int64, err error) {
+	var temp int64
+	temp, err = (*packet.Identifier)(&c.GameRuleKey).ReadFrom(r)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	temp, err = (*packet.String)(&c.Value).ReadFrom(r)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}
+
+func (c SetGameRuleEntry) WriteTo(w io.Writer) (n int64, err error) {
+	var temp int64
+	temp, err = (*packet.Identifier)(&c.GameRuleKey).WriteTo(w)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	temp, err = (*packet.String)(&c.Value).WriteTo(w)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}
 func (c *SetJigsawBlock) ReadFrom(r io.Reader) (n int64, err error) {
 	var temp int64
 	temp, err = (&c.Location).ReadFrom(r)
@@ -2381,6 +2388,25 @@ func (c SignUpdate) WriteTo(w io.Writer) (n int64, err error) {
 		return n, err
 	}
 	temp, err = (*packet.String)(&c.Line4).WriteTo(w)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}
+func (c *SpectatorAction) ReadFrom(r io.Reader) (n int64, err error) {
+	var temp int64
+	temp, err = (*packet.VarInt)(&c.SpectateEntityID).ReadFrom(r)
+	n += temp
+	if err != nil {
+		return n, err
+	}
+	return n, err
+}
+
+func (c SpectatorAction) WriteTo(w io.Writer) (n int64, err error) {
+	var temp int64
+	temp, err = (*packet.VarInt)(&c.SpectateEntityID).WriteTo(w)
 	n += temp
 	if err != nil {
 		return n, err

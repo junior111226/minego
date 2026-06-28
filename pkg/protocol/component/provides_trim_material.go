@@ -1,51 +1,16 @@
 package component
 
 import (
-	"io"
-
 	"github.com/KonjacBot/go-mc/net/packet"
 )
 
+// As of 26.2 this component is a plain Holder<TrimMaterial>: a VarInt where 0
+// means an inline (direct) TrimMaterial follows, otherwise it is a registry
+// reference id. This matches the OptID wire format.
+//
+//codec:gen
 type ProvidesTrimMaterial struct {
-	Mode     int8
-	Name     packet.Identifier
 	Material packet.OptID[TrimMaterial, *TrimMaterial]
-}
-
-func (p *ProvidesTrimMaterial) ReadFrom(r io.Reader) (n int64, err error) {
-	n1, err := (*packet.Byte)(&p.Mode).ReadFrom(r)
-	if err != nil {
-		return n1, err
-	}
-	if p.Mode == 0 {
-		n2, err := p.Name.ReadFrom(r)
-		return n1 + n2, err
-	}
-
-	if p.Mode == 1 {
-		n2, err := p.Material.ReadFrom(r)
-		return n1 + n2, err
-	}
-
-	return n1, err
-}
-
-func (p ProvidesTrimMaterial) WriteTo(w io.Writer) (int64, error) {
-	n1, err := (*packet.Byte)(&p.Mode).WriteTo(w)
-	if err != nil {
-		return n1, err
-	}
-
-	if p.Mode == 0 {
-		n2, err := p.Name.WriteTo(w)
-		return n1 + n2, err
-	}
-
-	if p.Mode == 1 {
-		n2, err := p.Material.WriteTo(w)
-		return n1 + n2, err
-	}
-	return n1, err
 }
 
 func (*ProvidesTrimMaterial) ID() string {

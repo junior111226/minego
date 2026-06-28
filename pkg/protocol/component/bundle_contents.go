@@ -1,12 +1,12 @@
 package component
 
 import (
-	slot2 "github.com/KonjacBot/minego/pkg/protocol/slot"
+	"github.com/KonjacBot/minego/pkg/protocol/slot"
 )
 
 //codec:gen
 type BundleContents struct {
-	Items []slot2.Slot
+	Items []slot.ItemStackTemplate
 }
 
 func (*BundleContents) ID() string {
