@@ -15,4 +15,4 @@ require (
 	golang.org/x/net v0.43.0
 )
 
-require github.com/KonjacBot/go-mc v0.0.0-20260628160132-0905d4af19c2
+require github.com/KonjacBot/go-mc v0.0.0-20260628222915-717366de7958
